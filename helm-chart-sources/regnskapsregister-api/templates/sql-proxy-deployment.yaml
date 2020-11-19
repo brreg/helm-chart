@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: postgresql-sqlproxy
+  name: postgresql-sqlproxy
+  namespace: {{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: postgresql-sqlproxy
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: postgresql-sqlproxy
+    spec:
+      volumes:
+        - name: google-cloud-key
+          secret:
+            defaultMode: 420
+            secretName: postgresql-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}-key
+        - name: ssl-certs
+          hostPath:
+            path: /etc/ssl/certs
+      containers:
+        - env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/secrets/google/key.json
+          image: gcr.io/cloudsql-docker/gce-proxy:1.15
+          volumeMounts:
+            - name: ssl-certs
+              mountPath: /etc/ssl/certs
+            - name: google-cloud-key
+              mountPath: /var/secrets/google
+          command: ["/cloud_sql_proxy",
+                    "-instances={{ required "Missing value RREG_SQL_PROXY_CLUSTER" .Values.RREG_SQL_PROXY_CLUSTER }}:europe-north1:rreg-sql11-{{ required "Missing value RREG_SQL_PROXY_SQL_ENVIRONMENT" .Values.RREG_SQL_PROXY_SQL_ENVIRONMENT }}=tcp:0.0.0.0:5432"]
+          imagePullPolicy: Always
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - netstat -tlnp | grep -i cloud_sql_proxy
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: postgresql-sqlproxy
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

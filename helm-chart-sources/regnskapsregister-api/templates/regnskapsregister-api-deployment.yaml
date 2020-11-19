@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    brreg.regnskapsregister-api.service: regnskapsregister-api
+  name: regnskapsregister-api
+  namespace: {{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        brreg.regnskapsregister-api.service: regnskapsregister-api
+    spec:
+      containers:
+      - env:
+          - name: RRAPI_POSTGRES_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_POSTGRES_DB_URL
+          - name: RRAPI_POSTGRES_DBO_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_POSTGRES_DBO_USER
+          - name: RRAPI_POSTGRES_DBO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_POSTGRES_DBO_PASSWORD
+          - name: RRAPI_POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_POSTGRES_USER
+          - name: RRAPI_POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_POSTGRES_PASSWORD
+          - name: RRAPI_SFTP_SERVER
+            valueFrom:
+              secretKeyRef:
+                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_SFTP_SERVER
+          - name: RRAPI_SFTP_USER
+            valueFrom:
+              secretKeyRef:
+                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_SFTP_USER
+          - name: RRAPI_SFTP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_SFTP_PASSWORD
+          - name: RRAPI_SFTP_PORT
+            valueFrom:
+              secretKeyRef:
+                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_SFTP_PORT
+          - name: RRAPI_SFTP_DIRECTORY
+            valueFrom:
+              secretKeyRef:
+                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_SFTP_DIRECTORY
+          - name: RRAPI_SLACK_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: slack-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                key: RRAPI_SLACK_TOKEN
+        name: regnskapsregister-api
+        image: {{ required "Missing value DOCKER_IMAGE_NAME" .Values.DOCKER_IMAGE_NAME }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: {{ required "Missing value RREG_REGNSKAPSREGISTER_API_MEMORY" .Values.RREG_REGNSKAPSREGISTER_API_MEMORY | quote }}
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+      restartPolicy: Always
+status: {}

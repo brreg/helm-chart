@@ -1,0 +1,4 @@
+#DValues for ut1 environment
+NAMESPACE: ut1
+RREG_INGRESSNAME: ingress-ut1
+RREG_INGRESS_IP_NAME: rreg.ut1.rreg-dev.brreg.no
