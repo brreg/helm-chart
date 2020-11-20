@@ -9,16 +9,16 @@ First you have to create a subfolder under `helm-chart-source`. Folder name shou
 Then you have to package and push the new service to the repo:
 ```
 helm package helm-chart-sources/<servicename>
-helm repo index --url https://informasjonsforvaltning.github.io/helm-chart/ .
+helm repo index --url https://github.com/brreg/helm-chart/raw/main/ .
 git add *
-git commit -m"<beskrivelse av endring>"
+git commit -m '<commit message>'
 git push
 ```
 Example:
 ```
-helm package helm-chart-sources/fdk-harvest-scheduler
-helm repo index --url https://informasjonsforvaltning.github.io/helm-chart/ .
+helm package helm-chart-sources/regnskapsregister-api
+helm repo index --url https://github.com/brreg/helm-chart/raw/main/ .
 git add *
-git commit -m"added helm template for harvest scheduler service"
+git commit -m 'added helm template for regnskapsregister-api service'"'
 git push
 ```
