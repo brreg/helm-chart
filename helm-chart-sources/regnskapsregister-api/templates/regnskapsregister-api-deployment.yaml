@@ -21,60 +21,27 @@ spec:
       containers:
       - env:
           - name: RRAPI_POSTGRES_DB_URL
-            valueFrom:
-              secretKeyRef:
-                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_POSTGRES_DB_URL
+            value: {{ required "Missing value RRAPI_POSTGRES_DB_URL" .Values.RRAPI_POSTGRES_DB_URL }}
           - name: RRAPI_POSTGRES_DBO_USER
-            valueFrom:
-              secretKeyRef:
-                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_POSTGRES_DBO_USER
+            value: {{ required "Missing value RRAPI_POSTGRES_DBO_USER" .Values.RRAPI_POSTGRES_DBO_USER }}
           - name: RRAPI_POSTGRES_DBO_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_POSTGRES_DBO_PASSWORD
+            value: {{ required "Missing value RRAPI_POSTGRES_DBO_PASSWORD" .Values.RRAPI_POSTGRES_DBO_PASSWORD }}
           - name: RRAPI_POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_POSTGRES_USER
+            value: {{ required "Missing value RRAPI_POSTGRES_USER" .Values.RRAPI_POSTGRES_USER }}
           - name: RRAPI_POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_POSTGRES_PASSWORD
+            value: {{ required "Missing value RRAPI_POSTGRES_PASSWORD" .Values.RRAPI_POSTGRES_PASSWORD }}
           - name: RRAPI_SFTP_SERVER
-            valueFrom:
-              secretKeyRef:
-                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_SFTP_SERVER
+            value: {{ required "Missing value RRAPI_SFTP_SERVER" .Values.RRAPI_SFTP_SERVER }}
           - name: RRAPI_SFTP_USER
-            valueFrom:
-              secretKeyRef:
-                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_SFTP_USER
+            value: {{ required "Missing value RRAPI_SFTP_USER" .Values.RRAPI_SFTP_USER }}
           - name: RRAPI_SFTP_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_SFTP_PASSWORD
+            value: {{ required "Missing value RRAPI_SFTP_PASSWORD" .Values.RRAPI_SFTP_PASSWORD }}
           - name: RRAPI_SFTP_PORT
-            valueFrom:
-              secretKeyRef:
-                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_SFTP_PORT
+            value: {{ required "Missing value RRAPI_SFTP_PORT" .Values.RRAPI_SFTP_PORT }}
           - name: RRAPI_SFTP_DIRECTORY
-            valueFrom:
-              secretKeyRef:
-                name: sftp-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_SFTP_DIRECTORY
+            value: {{ required "Missing value RRAPI_SFTP_DIRECTORY" .Values.RRAPI_SFTP_DIRECTORY }}
           - name: RRAPI_SLACK_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: slack-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
-                key: RRAPI_SLACK_TOKEN
+            value: {{ required "Missing value RRAPI_SLACK_TOKEN" .Values.RRAPI_SLACK_TOKEN }}
         name: regnskapsregister-api
         image: {{ required "Missing value DOCKER_IMAGE_NAME" .Values.DOCKER_IMAGE_NAME }}
         imagePullPolicy: Always
