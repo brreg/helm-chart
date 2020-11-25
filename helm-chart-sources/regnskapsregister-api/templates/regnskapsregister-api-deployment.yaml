@@ -21,29 +21,29 @@ spec:
       containers:
       - env:
           - name: RRAPI_POSTGRES_DB_URL
-            value: {{ required "Missing value RRAPI_POSTGRES_DB_URL" .Values.RRAPI_POSTGRES_DB_URL }}
+            value: {{ required "Missing value RRAPI_POSTGRES_DB_URL" .Values.RRAPI_POSTGRES_DB_URL | quote }}
           - name: RRAPI_POSTGRES_DBO_USER
-            value: {{ required "Missing value RRAPI_POSTGRES_DBO_USER" .Values.RRAPI_POSTGRES_DBO_USER }}
+            value: {{ required "Missing value RRAPI_POSTGRES_DBO_USER" .Values.RRAPI_POSTGRES_DBO_USER | quote }}
           - name: RRAPI_POSTGRES_DBO_PASSWORD
-            value: {{ required "Missing value RRAPI_POSTGRES_DBO_PASSWORD" .Values.RRAPI_POSTGRES_DBO_PASSWORD }}
+            value: {{ required "Missing value RRAPI_POSTGRES_DBO_PASSWORD" .Values.RRAPI_POSTGRES_DBO_PASSWORD | quote }}
           - name: RRAPI_POSTGRES_USER
-            value: {{ required "Missing value RRAPI_POSTGRES_USER" .Values.RRAPI_POSTGRES_USER }}
+            value: {{ required "Missing value RRAPI_POSTGRES_USER" .Values.RRAPI_POSTGRES_USER | quote }}
           - name: RRAPI_POSTGRES_PASSWORD
-            value: {{ required "Missing value RRAPI_POSTGRES_PASSWORD" .Values.RRAPI_POSTGRES_PASSWORD }}
+            value: {{ required "Missing value RRAPI_POSTGRES_PASSWORD" .Values.RRAPI_POSTGRES_PASSWORD | quote }}
           - name: RRAPI_SFTP_SERVER
-            value: {{ required "Missing value RRAPI_SFTP_SERVER" .Values.RRAPI_SFTP_SERVER }}
+            value: {{ required "Missing value RRAPI_SFTP_SERVER" .Values.RRAPI_SFTP_SERVER | quote }}
           - name: RRAPI_SFTP_USER
-            value: {{ required "Missing value RRAPI_SFTP_USER" .Values.RRAPI_SFTP_USER }}
+            value: {{ required "Missing value RRAPI_SFTP_USER" .Values.RRAPI_SFTP_USER | quote }}
           - name: RRAPI_SFTP_PASSWORD
-            value: {{ required "Missing value RRAPI_SFTP_PASSWORD" .Values.RRAPI_SFTP_PASSWORD }}
+            value: {{ required "Missing value RRAPI_SFTP_PASSWORD" .Values.RRAPI_SFTP_PASSWORD | quote }}
           - name: RRAPI_SFTP_PORT
-            value: {{ required "Missing value RRAPI_SFTP_PORT" .Values.RRAPI_SFTP_PORT }}
+            value: {{ required "Missing value RRAPI_SFTP_PORT" .Values.RRAPI_SFTP_PORT | quote }}
           - name: RRAPI_SFTP_DIRECTORY
-            value: {{ required "Missing value RRAPI_SFTP_DIRECTORY" .Values.RRAPI_SFTP_DIRECTORY }}
+            value: {{ required "Missing value RRAPI_SFTP_DIRECTORY" .Values.RRAPI_SFTP_DIRECTORY | quote }}
           - name: RRAPI_SLACK_TOKEN
-            value: {{ required "Missing value RRAPI_SLACK_TOKEN" .Values.RRAPI_SLACK_TOKEN }}
+            value: {{ required "Missing value RRAPI_SLACK_TOKEN" .Values.RRAPI_SLACK_TOKEN | quote }}
         name: regnskapsregister-api
-        image: {{ required "Missing value DOCKER_IMAGE_NAME" .Values.DOCKER_IMAGE_NAME }}
+        image: {{ required "Missing value DOCKER_IMAGE_NAME" .Values.DOCKER_IMAGE_NAME | quote }}
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
