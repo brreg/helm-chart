@@ -41,7 +41,7 @@ spec:
             - name: google-cloud-key
               mountPath: /var/secrets/google
           command: ["/cloud_sql_proxy",
-                    "-instances={{ required "Missing value RREG_SQL_PROXY_CLUSTER" .Values.RREG_SQL_PROXY_CLUSTER }}:europe-north1:rreg-sql11-{{ required "Missing value RREG_SQL_PROXY_SQL_ENVIRONMENT" .Values.RREG_SQL_PROXY_SQL_ENVIRONMENT }}=tcp:0.0.0.0:5432"]
+                    "-instances={{ required "Missing value RRAPI_SQL_PROXY_CLUSTER" .Values.RRAPI_SQL_PROXY_CLUSTER }}:europe-north1:rreg-sql11-{{ required "Missing value RRAPI_SQL_PROXY_SQL_ENVIRONMENT" .Values.RRAPI_SQL_PROXY_SQL_ENVIRONMENT }}=tcp:0.0.0.0:5432"]
           imagePullPolicy: Always
           livenessProbe:
             exec:
