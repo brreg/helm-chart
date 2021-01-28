@@ -1,2 +1,4 @@
 #DValues for production environment
 NAMESPACE: prod
+RREG_INGRESSNAME: ingress-prod
+RREG_INGRESS_IP_NAME: 34.98.91.231
