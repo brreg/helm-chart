@@ -40,8 +40,12 @@ spec:
             value: {{ required "Missing value RRAPI_SFTP_PORT" .Values.RRAPI_SFTP_PORT | quote }}
           - name: RRAPI_SFTP_DIRECTORY
             value: {{ required "Missing value RRAPI_SFTP_DIRECTORY" .Values.RRAPI_SFTP_DIRECTORY | quote }}
+          - name: RRAPI_SLACK_CHANNEL
+            value: {{ required "Missing value RRAPI_SLACK_CHANNEL" .Values.RRAPI_SLACK_CHANNEL | quote }}
           - name: RRAPI_SLACK_TOKEN
             value: {{ required "Missing value RRAPI_SLACK_TOKEN" .Values.RRAPI_SLACK_TOKEN | quote }}
+          - name: RRAPI_IP_SALT
+            value: {{ required "Missing value RRAPI_IP_SALT" .Values.RRAPI_IP_SALT | quote }}
         name: regnskapsregister-api
         image: {{ required "Missing value DOCKER_IMAGE_NAME" .Values.DOCKER_IMAGE_NAME | quote }}
         imagePullPolicy: Always

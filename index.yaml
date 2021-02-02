@@ -3,12 +3,12 @@ entries:
   regnskapsregister-api:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-01-28T13:03:00.6190071+01:00"
+    created: "2021-02-02T16:54:35.8316278+01:00"
     description: BRREG regnskapsregister-api service
-    digest: e0e6da56b49f4a043474b7a6b640f8da328bf6e1664b44115833e79145023134
+    digest: 2fb6d4de3d16a491842faff9a933631a39a5c888bf25cec4353caa54a272a550
     home: https://github.com/brreg/regnskapsregister-api
     name: regnskapsregister-api
     urls:
     - https://github.com/brreg/helm-chart/raw/main/regnskapsregister-api-0.1.0.tgz
     version: 0.1.0
-generated: "2021-01-28T13:03:00.6180416+01:00"
+generated: "2021-02-02T16:54:35.8306347+01:00"
